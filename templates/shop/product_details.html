@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+    <div class="d-flex">
+        <div class="d-inline p-2 w-50">
+            <img src="{{ product.photo.url }}"
+                 class="w-100 rounded mx-auto d-block" alt="{{ product.description }}"/>
+        </div>
+        <div class="d-inline p-2 w-50">
+                <div class="d-flex justify-content-around">
+                    <h5><u>Type:</u> {{ product.type }}</h5>      {# TUKA TRQBWA DA OPRAVQ DA IZLIZA KAKUW TIP E PRODUKTA!!!!!! #}
+                </div>
+            <p class="mt-2">{{ product.description }}</p>
+{#            <p class="mt-2">{{  }}</p>#}
+
+                {% if request.user.is_superuser %}
+                    <a class="nav-link" href="{% url 'edit product' product.id %}">Edit Product</a>
+                    <a class="nav-link" href="{% url 'delete product' product.id %}">Delete Product</a>
+{#                    <a class="nav-link" href="{% url 'delete product photo' product_photo.id %}">Delete Product</a>#}
+                {% endif %}
+
+
+        </div>
+    </div>
+
+{% endblock %}
