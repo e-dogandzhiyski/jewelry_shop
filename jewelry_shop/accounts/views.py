@@ -6,6 +6,17 @@ from django.contrib.auth import views as auth_views
 
 from jewelry_shop.accounts.forms import CreateProfileForm
 from jewelry_shop.accounts.models import Profile
+from jewelry_shop.shopping_cart.models import Order
+
+
+def my_profile(request):
+    my_user_profile = Profile.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    context = {
+        'my_orders': my_orders
+    }
+
+    return render(request, 'accounts/profile.html', context)
 
 
 class UserRegisterView(views.CreateView):

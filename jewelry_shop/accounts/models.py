@@ -4,6 +4,7 @@ from django.contrib.auth import models as auth_models
 
 from jewelry_shop.accounts.managers import AppUserManager
 from jewelry_shop.common.validators import validate_only_letters
+from jewelry_shop.shop.models import Product
 
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -72,6 +73,8 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+
+    products = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

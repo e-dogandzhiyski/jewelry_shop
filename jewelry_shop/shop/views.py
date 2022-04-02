@@ -1,11 +1,32 @@
 # from django.shortcuts import render
 from django.contrib.auth import mixins as auth_mixin
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from jewelry_shop.common.views_mixins import RedirectToDashboard
 from jewelry_shop.shop.forms import CreateProductForm, DeleteProductForm  # , DeleteProductPhotoForm
 # from jewelry_shop.shop.models import ProductPhoto
 from jewelry_shop.shop.models import Product
+from jewelry_shop.shopping_cart.models import Order
+
+
+@login_required
+def product_list(request):
+    object_list = Product.objects.all()
+    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
+    current_order_products = []
+    if filtered_orders.exists():
+        user_order = filtered_orders[0]
+        user_order_items = user_order.items.all()
+        current_order_products = [product.product for product in user_order_items]
+
+    context = {
+        'object_list': object_list,
+        'current_order_products': current_order_products
+    }
+
+    return render(request, 'accounts/products_list.html', context)
 
 
 class HomeView(RedirectToDashboard, views.TemplateView):
@@ -59,3 +80,21 @@ class EditProductView(views.UpdateView):
 class DeleteProductView(views.DeleteView):
     template_name = 'shop/product_delete.html'
     form_class = DeleteProductForm
+
+
+@login_required
+def product_list(request):
+    object_list = Product.objects.all()
+    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
+    current_order_products = []
+    if filtered_orders.exists():
+        user_order = filtered_orders[0]
+        user_order_items = user_order.items.all()
+        current_order_products = [product.product for product in user_order_items]
+
+    context = {
+        'object_list': object_list,
+        'current_order_products': current_order_products
+    }
+
+    return render(request, 'accounts/products_list.html', context)
