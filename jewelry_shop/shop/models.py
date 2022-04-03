@@ -6,6 +6,7 @@ class Product(models.Model):
     NECKLACE = "Necklace"
     CHAIN = "Chain"
     EARRINGS = "Earrings"
+    # IMAGE_UPLOAD_TO_DIR = 'products/'
 
     TYPES = [(x, x) for x in (RING, NECKLACE, CHAIN, EARRINGS)]
     PRODUCT_NAME_MAX_LEN = 30
@@ -27,6 +28,7 @@ class Product(models.Model):
     )
 
     photo = models.ImageField(
+        # upload_to=IMAGE_UPLOAD_TO_DIR,
         default='no_image.png'
     )
 

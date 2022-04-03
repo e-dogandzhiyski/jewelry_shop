@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.contrib.auth import mixins as auth_mixin
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from jewelry_shop.common.views_mixins import RedirectToDashboard
@@ -77,24 +77,28 @@ class EditProductView(views.UpdateView):
         return reverse_lazy('product details', kwargs={'pk': self.object.id})
 
 
-class DeleteProductView(views.DeleteView):
-    template_name = 'shop/product_delete.html'
-    form_class = DeleteProductForm
-
-
-@login_required
-def product_list(request):
-    object_list = Product.objects.all()
-    filtered_orders = Order.objects.filter(owner=request.user.profile, is_ordered=False)
-    current_order_products = []
-    if filtered_orders.exists():
-        user_order = filtered_orders[0]
-        user_order_items = user_order.items.all()
-        current_order_products = [product.product for product in user_order_items]
+def delete_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = DeleteProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = DeleteProductForm(instance=product)
 
     context = {
-        'object_list': object_list,
-        'current_order_products': current_order_products
+        'form': form,
+        'product': product,
     }
 
-    return render(request, 'accounts/products_list.html', context)
+    return render(request, 'shop/product_delete.html', context)
+
+# class DeleteProductView(views.DeleteView):
+#     template_name = 'shop/product_delete.html'
+#     form_class = DeleteProductForm
+#
+#     def get_queryset(self, pk):
+#         product = Product.objects.get(pk=self.pk)
+#         return product
+
