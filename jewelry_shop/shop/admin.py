@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from jewelry_shop.shop.models import Product # ProductPhoto
+from jewelry_shop.shop.models import Product
 
 
 class ProductInlineAdmin(admin.StackedInline):
@@ -12,6 +11,3 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'type')
 
 
-# @admin.register(ProductPhoto)
-# class ProductPhotoAdmin(admin.ModelAdmin):
-#     pass

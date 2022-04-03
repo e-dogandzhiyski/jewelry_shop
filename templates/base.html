@@ -56,19 +56,12 @@
                 {% endif %}
 
                 <li class="nav-item">
-                {% if request.user.is_superuser %}
+                {% if request.user.is_superuser or request.user.is_staff %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'create product' %}">Create Product</a>
                     </li>
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{% url 'create product photo' %}">Create Product Photo</a>#}
-{#                    </li>#}
                 {% endif %}
-{#                    {% if requset.user %}#}
-{#                        <a class="nav-link" href="{% url 'profile details' %}">{{ request.user }}</a>#}
-{#                        {{ request.user }}#}
-{#                    {% endif %}#}
-                </li>
+
         </ul>
     </div>
 </nav>
