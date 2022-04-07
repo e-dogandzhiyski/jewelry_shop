@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
             name='ProductPhoto',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('photo', models.ImageField(upload_to='')),
+                ('image', models.ImageField(upload_to='')),
                 ('description', models.TextField(blank=True, null=True)),
                 ('tagged_product', models.ManyToManyField(to='shop.Product')),
             ],

@@ -33,7 +33,7 @@ class DashboardNoProfileView(views.ListView):
 class CreateProductView(auth_mixin.LoginRequiredMixin, views.CreateView):
     model = Product
     template_name = 'shop/product_create.html'
-    fields = ('photo', 'description', 'type', 'price', 'name')
+    fields = ('image', 'description', 'type', 'price', 'name')
 
     success_url = reverse_lazy('dashboard')
 
@@ -51,7 +51,7 @@ class ProductDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
 class EditProductView(views.UpdateView):
     model = Product
     template_name = 'shop/photo_edit.html'
-    fields = ('description', 'photo', 'name', 'type', 'price')
+    fields = ('description', 'image', 'name', 'type', 'price')
 
     def get_success_url(self):
         return reverse_lazy('product details', kwargs={'pk': self.object.id})

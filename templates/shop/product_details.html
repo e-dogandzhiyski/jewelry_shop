@@ -3,7 +3,7 @@
 
     <div class="d-flex">
         <div class="d-inline p-2 w-50">
-            <img src="{{ product.photo.url }}"
+            <img src="{{ product.image.url }}"
                  class="w-100 rounded mx-auto d-block" alt="{{ product.description }}"/>
         </div>
         <div class="d-inline p-2 w-50">
@@ -11,12 +11,11 @@
                     <h5><u>Type:</u> {{ product.type }}</h5>      {# TUKA TRQBWA DA OPRAVQ DA IZLIZA KAKUW TIP E PRODUKTA!!!!!! #}
                 </div>
             <p class="mt-2">{{ product.description }}</p>
-{#            <p class="mt-2">{{  }}</p>#}
                     <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
                 {% if request.user.is_superuser or request.user.is_staff %}
                     <a class="nav-link" href="{% url 'edit product' product.id %}">Edit Product</a>
                     <a class="nav-link" href="{% url 'delete product' product.id %}">Delete Product</a>
-{#                    <a class="nav-link" href="{% url 'delete product photo' product_photo.id %}">Delete Product</a>#}
+{#                    <a class="nav-link" href="{% url 'delete product image' product_photo.id %}">Delete Product</a>#}
                 {% endif %}
 
 

@@ -1,0 +1,16 @@
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_URL = '/media/'
+
+    path('edit-password/', ChangeUserPasswordView.as_view(), name='change password'),
+
+    class ChangeUserPasswordView(auth_views.PasswordChangeView):
+    template_name = 'accounts/change_password.html'

@@ -133,12 +133,10 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 LOGIN_URL = reverse_lazy('login user')
 
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = 'static/'
-
 STATICFILES_DIRS = (
     BASE_DIR / 'staticfiles',
 )
 
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
-MEDIA_URL = '/media/'

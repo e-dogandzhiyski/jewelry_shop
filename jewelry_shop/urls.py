@@ -10,3 +10,4 @@ urlpatterns = [
         path('cart/', include('jewelry_shop.shopping_cart.urls')),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+

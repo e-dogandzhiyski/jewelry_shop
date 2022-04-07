@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='product',
-            name='photo',
+            name='image',
             field=models.ImageField(default='no_image.png', upload_to=''),
         ),
         migrations.DeleteModel(

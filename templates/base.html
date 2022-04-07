@@ -41,19 +41,20 @@
                         <a class="nav-link" href="{% url 'profile details' request.user.id %}">Profile Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout user' %}">Logout</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'order_summary' %}">Go to cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout user' %}">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'dashboard without profile' %}">DASHBOARD_NO_PROFILE</a>
                     </li>
                 {% endif %}
+
 
                 <li class="nav-item">
                 {% if request.user.is_superuser or request.user.is_staff %}
@@ -76,12 +77,12 @@
 
 
 
-{#{% load static %}#}
+{#{% load staticfiles %}#}
 {#<html lang="en">#}
 {#<head>#}
 {#    <meta charset="UTF-8">#}
 {#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'css/stylee.css' %}">#}
+{#    <link rel="stylesheet" type="text/css" href="{% staticfiles 'css/stylee.css' %}">#}
 {#    <title>Home</title>#}
 {#</head>#}
 {##}
@@ -89,7 +90,7 @@
 {##}
 {#<nav>#}
 {#    <ul>#}
-{#        <li class="img"><img src="{% static 'images/candy.jpg'%}" alt="dollar"></li>#}
+{#        <li class="img"><img src="{% staticfiles 'images/candy.jpg'%}" alt="dollar"></li>#}
 {#    </ul>#}
 {#</nav>#}
 {##}
@@ -131,7 +132,7 @@
 {#                        <a class="nav-link" href="{%  url 'create pet' %}">Add Pet</a>#}
 {#                    </li>#}
 {#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{% url 'create pet photo' %}">Add Photo</a>#}
+{#                        <a class="nav-link" href="{% url 'create pet image' %}">Add Photo</a>#}
 {#                    </li>#}
 {#                {% endif %}#}
 {#                <li class="nav-item">#}

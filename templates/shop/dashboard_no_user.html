@@ -14,7 +14,7 @@
             <div class="row mb-5">
                 {% for product in products %}
                     <div class="card ml-3 mb-3" style="width: 18rem;">
-{#                            {% if not product_photo.photo.url %}#}
+{#                            {% if not product_photo.image.url %}#}
                                 <p class="card-text">{% static 'no_image.png' %}</p>
 {#                            {% else %}#}
                                 <img src="{{ product_photo.photo.url }}"
@@ -31,7 +31,7 @@
         </div>
 
 {#        <div class=" row d-flex justify-content-center align-content-center">#}
-{#            <a href="{% url 'create product photo' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add#}
+{#            <a href="{% url 'create product image' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add#}
 {#                Photo</a>#}
 {#        </div>#}
 
