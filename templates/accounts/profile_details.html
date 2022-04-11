@@ -15,18 +15,9 @@
                     <h5><u>Email:</u> {{ profile.email }}</h5>
                 </div>
 
+                <a href="{% url 'dashboard' %}">View Cart</a>
+                <a href="{% url 'change password' %}">Change Password</a>
 
-                <a href="{% url 'dashboard' %}" class="btn btn-primary">View Cart</a>
-                <a href="{% url 'change password' %}" class="btn btn-primary">Change Password</a>
-
-
-
-{#                <p class="mt-2">Total Images: {{ total_pet_photos_count }}</p>#}
-{#                <p class="mt-2">Total Likes: {{ total_likes_count }}</p>#}
-{#                {% if is_owner %}#}
-{#                    <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>#}
-{#                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>#}
-{#                {% endif %}#}
             </div>
         </div>
     </div>

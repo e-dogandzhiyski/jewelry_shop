@@ -6,7 +6,7 @@ class Product(models.Model):
     NECKLACE = "Necklace"
     CHAIN = "Chain"
     EARRINGS = "Earrings"
-    IMAGE_UPLOAD_TO_DIR = 'products/'
+    # IMAGE_UPLOAD_TO_DIR = 'products/'
 
     TYPES = [(x, x) for x in (RING, NECKLACE, CHAIN, EARRINGS)]
     PRODUCT_NAME_MAX_LEN = 30
@@ -28,11 +28,16 @@ class Product(models.Model):
     )
 
     image = models.ImageField(
-        upload_to=IMAGE_UPLOAD_TO_DIR,
-        # null=True,
-        # blank=True,
-        # default='pumpkin.jpg'
+        # upload_to=IMAGE_UPLOAD_TO_DIR,
+        null=True,
+        blank=True,
+        default='no_image.png'
     )
+
+    # image = models.URLField(
+    #     null=True,
+    #     blank=True,
+    # )
 
     price = models.FloatField(
         null=False,

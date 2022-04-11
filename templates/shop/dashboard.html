@@ -3,13 +3,12 @@
 
 {% block page_content %}
     <h1 class='text-center'>
-        {% if product_photos %}
+        {% if products %}
             All Products
         {% else %}
             No products yet
         {% endif %}
     </h1>
-
         <div class="container mb-5">
             <div class="row mb-5">
                 {% for product in products %}
@@ -21,10 +20,10 @@
                                      class="card-img-top" alt="Photo description">
                                 <div class="card-body">
                             {% endif %}
-                            <a class="nav-link" href="{% url 'product details' product.id %}">Product Details</a>
+                        <p class="card-text">{{ product.name }}</p>
                         <p class="card-text">{{ product.description }}</p>
                         <p class="card-text">{{ product.price }}</p>
-                        <p class="card-text">{{ product.name }}</p>
+                        <a class="nav-link" href="{% url 'product details' product.id %}">Product Details</a>
 
                         </div>
                     </div>
@@ -32,10 +31,35 @@
             </div>
         </div>
 
-{#        <div class=" row d-flex justify-content-center align-content-center">#}
-{#            <a href="{% url 'create product image' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add#}
-{#                Photo</a>#}
-{#        </div>#}
+<hr>
 
+{% if request.last_viewed_products_ids %}
+<h2>Last viewed products :</h2>
+
+        <div class="container mb-5">
+            <div class="row mb-5">
+
+                {% for product in request.last_viewed_products_ids %}
+                    <div class="card ml-3 mb-3" style="width: 18rem;">
+                            {% if not product.image %}
+                                <p class="card-text">{% static 'images/pumpkin.jpg' %}</p>
+                            {% else %}
+                                <img src="{{ product.image.url }}"
+                                     class="card-img-top" alt="Photo description">
+                                <div class="card-body">
+                            {% endif %}
+                        <p class="card-text">{{ product.name }}</p>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text">{{ product.price }}</p>
+                        <a class="nav-link" href="{% url 'product details' product.id %}">Product Details</a>
+
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+<hr>
+{% endif %}
 {% endblock %}
 

@@ -1,5 +1,4 @@
-from jewelry_shop.common.helpers import BootstrapFormMixin, DisabledFieldsFormMixin
-from jewelry_shop.shop.models import Product  # ProductPhoto
+from jewelry_shop.shop.models import Product  # Product
 from django import forms
 
 

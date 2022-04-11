@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'jewelry_shop.common.middlewares.last_viewed_products_middleware',
 ]
 
 ROOT_URLCONF = 'jewelry_shop.urls'
@@ -134,9 +135,28 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_URL = reverse_lazy('login user')
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (
-    BASE_DIR / 'staticfiles',
-)
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
+
+# LOGGING = {
+#     'version': 1,
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'filters': [],
+#             'class': 'logging.StreamHandler',
+#         }
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'level': 'DEBUG',
+#             'handlers': ['console'],
+#         }
+#     }
+# }

@@ -1,0 +1,21 @@
+{#{% extends 'base.html' %}#}
+{#{% block page_content %}#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for profile in profile_list %}
+        <h1>{{ profile.email }}({{ profile.first_name }} {{ profile.last_name }}) Has the folowing oreder: {{ profile.order_set }} </h1>
+
+{#             {% for order in profile.order_set %}#}
+{#                {{ order }}#}
+{#             {% endfor %}</h1>#}
+    {% endfor %}
+</body>
+</html>
+
+{#{% endblock %}#}

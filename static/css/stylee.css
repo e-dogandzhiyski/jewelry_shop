@@ -45,20 +45,33 @@ nav ul li.img {
     margin-top: 5px;
 }
 
-/*h1 {                                            !* текста-имейла на акаунта в който си *!*/
-/*    text-align: right;*/
-/*}*/
-
-
 h1 {
     display: block;
     font-size: 2em;
-    margin-block-start: 0em;
+    margin-block-start: 0;
     margin-block-end: 0.67em;
     margin-inline-start: 1680px;
-    margin-inline-end: 0px;
+    margin-inline-end: 0;
     font-weight: bold;
 }
+
+h2 {
+    display: block;
+    font-size: 10em;
+    margin-block-start: 0;
+    margin-block-end: 0.67em;
+    margin-inline-start: 1680px;
+    margin-inline-end: 0;
+    font-weight: bold;
+}
+
+/*h8 {*/
+/*    width:500px;*/
+/*    font-size: 500px;*/
+/*    margin: 0 auto;*/
+/*    background: gray;*/
+/*    text-align: center;*/
+/*}*/
 
 .form {
     border-radius: 5px;
@@ -209,15 +222,3 @@ hr {
     justify-content: space-between;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    background: #00334e;
-    width: 100%;
-    padding: 15px 0;
-}
-
-footer div {
-    text-align: center;
-    color: white;
-}

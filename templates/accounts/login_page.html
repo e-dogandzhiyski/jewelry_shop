@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page_content %}
+
 <form action="{% url 'login user' %}?next={{ next }}" method="post">
 
     {% csrf_token %}
@@ -10,3 +11,40 @@
 {% endblock %}
 </form>
 
+
+{#{% extends 'base.html' %}#}
+{#{% block page_content %}#}
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Game Shop</title>#}
+{#    <link rel="stylesheet" href="/static/css/login.css">#}
+{#</head>#}
+{#<body>#}
+{#<nav>#}
+{#    <p>Cotton Candy Shop</p>#}
+{#</nav>#}
+{#<h1>#}
+{#    Login to your account#}
+{#</h1>#}
+{#<br>#}
+{#<br>#}
+{#<section id="LoginPage">#}
+{#    <form action="{% url 'login user' %}" method="post">#}
+{#        <fieldset>#}
+{#            <legend>Login</legend>#}
+{##}
+{#            {{ form }}#}
+{#            {% csrf_token %}#}
+{##}
+{#            <br>#}
+{#            <button>Login</button>#}
+{#        </fieldset>#}
+{#    </form>#}
+{#</section>#}
+{#</body>#}
+{#</html>#}
+
+{#{% endblock %}#}

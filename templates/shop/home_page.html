@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_content %}
 
     <div class="jumbotron">
-        <img style="width: 100%"
-             src="" alt="">
+{#        <img style="width: 100%"#}
+{#        src="{% static 'images/pumpkin.jpg'  %}" alt="">          {# snimkata na home_page aka pri logvaneto #}
         <div class="position-sticky">
             <h1 class="display-4">Welcome to the CottonCandyShop</h1>
             <hr class="my-4">
             <div class="flex-row">
 
-
                 <a href="{% url 'login user' %}" class="btn btn-lg btn-secondary">Login</a>
                 <a href="{% url 'register user' %}" class="btn btn-lg btn-secondary">Register</a>
+
             </div>
         </div>
     </div>

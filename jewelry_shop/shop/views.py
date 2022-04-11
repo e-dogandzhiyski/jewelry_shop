@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
+
+from jewelry_shop.accounts.models import Profile
 from jewelry_shop.common.views_mixins import RedirectToDashboard
 from jewelry_shop.shop.forms import DeleteProductForm
 from jewelry_shop.shop.models import Product
@@ -42,10 +44,20 @@ class CreateProductView(auth_mixin.LoginRequiredMixin, views.CreateView):
         return super().form_valid(form)
 
 
-class ProductDetailsView(auth_mixin.LoginRequiredMixin, views.DetailView):
+class ProductDetailsView(views.DetailView):  # auth_mixin.LoginRequiredMixin
     model = Product
     template_name = 'shop/product_details.html'
     context_object_name = 'product'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+
+        last_viewed_products = request.session.get('last_viewed_products_ids', [])
+
+        last_viewed_products.insert(0, self.kwargs['pk'])
+        request.session['last_viewed_products_ids'] = last_viewed_products[:3]
+
+        return response
 
 
 class EditProductView(views.UpdateView):
@@ -91,3 +103,9 @@ def product_list(request):
     }
 
     return render(request, 'accounts/products_list.html', context)
+
+
+class ShowAllProfiles(views.ListView):
+    model = Profile
+    template_name = 'shop/profiles.html'
+    object = 'profile'
