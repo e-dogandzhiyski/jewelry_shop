@@ -52,3 +52,9 @@ class ProfileDetailsView(views.DetailView):
 
 class ChangeUserPasswordView(auth_views.PasswordChangeView):
     template_name = 'accounts/change_password.html'
+
+
+class ProfileOrdersView(views.DetailView):
+    model = Profile
+    template_name = 'accounts/my_orders.html'
+    context = 'products'

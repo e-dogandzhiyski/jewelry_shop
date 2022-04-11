@@ -10,11 +10,6 @@ from jewelry_shop.shop.models import Product
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     USERNAME_MAX_LEN = 30
 
-    username = models.CharField(
-        max_length=USERNAME_MAX_LEN,
-        unique=True
-    )
-
     date_joined = models.DateTimeField(
         auto_now_add=True,
     )
@@ -23,9 +18,11 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         default=False,
     )
 
-    email = models.EmailField()
+    email = models.EmailField(
+        unique=True,
+    )
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
 
     objects = AppUserManager()
 
@@ -56,18 +53,10 @@ class Profile(models.Model):
         blank=False,
     )
 
-    # username = models.CharField(
-    #     max_length=20,
-    #     unique=True,
-    #     null=False,
-    #     blank=False,
-    # )
-
     email = models.EmailField(
         null=True,
         blank=True
     )
-
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,

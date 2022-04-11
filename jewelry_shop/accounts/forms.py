@@ -34,7 +34,7 @@ class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'email')
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name')
         widgets = {
             'first_name': forms.TextInput(
                 attrs={
