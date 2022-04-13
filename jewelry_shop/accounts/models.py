@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 
 from jewelry_shop.accounts.managers import AppUserManager
-from jewelry_shop.common.validators import validate_only_letters
+from jewelry_shop.common.validators import validate_only_letters, validate_only_numbers
 from jewelry_shop.shop.models import Product
 
 
@@ -57,6 +57,7 @@ class Profile(models.Model):
         null=True,
         blank=True
     )
+
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
@@ -66,4 +67,51 @@ class Profile(models.Model):
     products = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.first_name} {self.last_name} {self.address}'
+
+class ShippingAddress(models.Model):
+    ADDRESS_MAX_LEN = 120
+    PHONE_NUMBER_MAX_LEN = 10
+    ZIP_CODE_MAX_LEN = 4
+    SOFIA = "Sofia"
+    PLOVDIV = "Plovdiv"
+    VARNA = "Varna"
+    BURGAS = "Burgas"
+    RUSE = "Ruse"
+    STARA_ZAGORA = "Stara Zagora"
+    PLEVEN = "Pleven"
+    SLIVEN = "Sliven"
+    DOBRICH = "Dobrich"
+    SHUMEN = "Shumen"
+
+    CITIES = [(x, x) for x in (SOFIA, PLOVDIV, VARNA, BURGAS, PLEVEN, SLIVEN, DOBRICH, SHUMEN)]
+
+    address = models.CharField(
+        max_length=ADDRESS_MAX_LEN,
+    )
+
+    city = models.CharField(
+        max_length=max(len(x) for (x, _) in CITIES),
+        choices=CITIES
+    )
+
+    zip_code = models.CharField(
+        max_length=ZIP_CODE_MAX_LEN,
+        validators=(
+            validate_only_numbers,
+        )
+    )
+
+    phone_number = models.CharField(
+        max_length=PHONE_NUMBER_MAX_LEN,
+        validators=(
+            validate_only_numbers,
+        )
+    )
+
+    user = models.OneToOneField(
+        AppUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+

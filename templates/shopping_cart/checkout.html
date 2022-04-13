@@ -60,18 +60,17 @@
                                 {% for item in order.get_cart_items %}
                                     <tr>
                                         <td>{{ item }}</td>
-                                        <td>${{ item.product.price }}</td>
+                                        <td>{{ item.product.price }} lv.</td>
                                     </tr>
                                 {% endfor %}
 
                         <tr>
                             <td><strong>Order Total</strong></td>
-                            <td><strong>${{ order.get_cart_total }}</strong></td>
+                            <td><strong>{{ order.get_cart_total }} lv.</strong></td>
                         </tr>
                     </table>
-                    <button onclick="toggleDisplay();" class="btn btn-warning" style="width: 100%;">Checkout with a
-                        credit card
-                    </button>
+                        <a class="nav-link" href="{% url 'shipping address' %}">Add Shipping address</a>
+{#                    <button onclick="toggleDisplay();" class="btn btn-warning" style="width: 100%;">Checkout with credit card </button>#}
                 </div>
             </div>
         </section>

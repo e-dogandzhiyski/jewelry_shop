@@ -2,7 +2,7 @@ from django.urls import path, reverse_lazy
 from django.views.generic import RedirectView
 
 from jewelry_shop.accounts.views import UserRegisterView, UserLoginView, UserLogoutView, ProfileDetailsView, \
-    ChangeUserPasswordView, ProfileOrdersView
+    ChangeUserPasswordView, AddShippingAddressView  # , ProfileOrdersView, ProfileShippingAddressView EditShippingAddressView
 
 urlpatterns = [
     path('register/', UserRegisterView.as_view(), name='register user'),
@@ -10,8 +10,10 @@ urlpatterns = [
     path('logout/', UserLogoutView.as_view(), name='logout user'),
 
     path('<int:pk>/', ProfileDetailsView.as_view(), name='profile details'),
+    path('add-shipping-address/', AddShippingAddressView.as_view(), name='shipping address'),
+    # path('add-shipping-address/<int:pk>', EditShippingAddressView.as_view(), name='shipping address'),
     path('edit-password/', ChangeUserPasswordView.as_view(), name='change password'),
-    path('password_change_done/', RedirectView.as_view(url=reverse_lazy('dashboard')), name='password_change_done'),
+    path('password_change_done/', RedirectView.as_view(url=reverse_lazy('dashboard')), name='password change done'),
 
     # path('my-previous-orders/<int:id>/', ProfileOrdersView.as_view(), name='profile previous orders'),
 ]

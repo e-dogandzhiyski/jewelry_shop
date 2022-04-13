@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block page_content %}
-    <h1 class='text-center'>
+    <h2 class='text-center'>
         {% if products %}
-            All Products
+            Our Products
         {% else %}
             No products yet
         {% endif %}
-    </h1>
+    </h2>
         <div class="container mb-5">
             <div class="row mb-5">
                 {% for product in products %}

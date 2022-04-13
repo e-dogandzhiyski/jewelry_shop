@@ -34,11 +34,6 @@ class Product(models.Model):
         default='no_image.png'
     )
 
-    # image = models.URLField(
-    #     null=True,
-    #     blank=True,
-    # )
-
     price = models.FloatField(
         null=False,
         blank=False,
