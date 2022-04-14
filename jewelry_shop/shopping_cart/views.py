@@ -38,7 +38,7 @@ def delete_from_cart(request, item_id):
     item_to_delete = OrderItem.objects.filter(pk=item_id)
     if item_to_delete.exists():
         item_to_delete[0].delete()
-        messages.info(request, "Item has been deleted")
+        # messages.info(request, "Item has been deleted")
     return redirect(reverse('order_summary'))
 
 
@@ -97,7 +97,7 @@ def update_transaction_records(request, order_id):
     user_profile.products.add(*order_products)
     user_profile.save()
 
-    messages.info(request, "Thank you! Your purchase was successful!")
+    # messages.info(request, "Thank you! Your purchase was successful!")
     print("Thank you! Your purchase was successful!")                                       # returns message but i don't know how to do messages
     return redirect(reverse('dashboard'))
 

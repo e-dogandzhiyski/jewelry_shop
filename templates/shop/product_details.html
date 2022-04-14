@@ -11,7 +11,7 @@
                     <h5><u>Type:</u> {{ product.type }}</h5>      {# TUKA TRQBWA DA OPRAVQ DA IZLIZA KAKUW TIP E PRODUKTA!!!!!! #}
                 </div>
             <p class="mt-2">{{ product.description }}</p>
-            <p class="mt-2">{{ product.price }}</p>
+            <p class="mt-2">{{ product.price|floatformat:2 }} lv.</p>
 
                     <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
 

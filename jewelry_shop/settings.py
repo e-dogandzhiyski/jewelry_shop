@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'jewelry_shop.common.middlewares.last_viewed_products_middleware',
+    # 'jewelry_shop.middlewares.handle_exception',
 ]
 
 ROOT_URLCONF = 'jewelry_shop.urls'
@@ -134,7 +135,7 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 LOGIN_URL = reverse_lazy('login user')
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]

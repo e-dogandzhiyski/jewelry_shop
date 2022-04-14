@@ -69,6 +69,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.address}'
 
+
 class ShippingAddress(models.Model):
     ADDRESS_MAX_LEN = 120
     PHONE_NUMBER_MAX_LEN = 10
@@ -115,3 +116,34 @@ class ShippingAddress(models.Model):
         primary_key=True,
     )
 
+    def __str__(self):
+        return f'{self.city}, {self.address}'
+
+
+class CardInfo(models.Model):
+    CARD_MAX_LEN = 16
+    CVV_MAX_LEN = 3
+
+    card_number = models.CharField(
+        max_length=CARD_MAX_LEN,
+        validators={
+            validate_only_numbers,
+        }
+    )
+
+    cvv = models.CharField(
+        max_length=CVV_MAX_LEN,
+        validators={
+            validate_only_numbers,
+        }
+    )
+
+    expiration_date = models.DateTimeField(
+
+    )
+
+    user = models.OneToOneField(
+        AppUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )

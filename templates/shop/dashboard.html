@@ -9,45 +9,46 @@
             No products yet
         {% endif %}
     </h2>
-        <div class="container mb-5">
-            <div class="row mb-5">
-                {% for product in products %}
-                    <div class="card ml-3 mb-3" style="width: 18rem;">
-                            {% if not product.image %}
-                                <p class="card-text">{% static 'images/pumpkin.jpg' %}</p>
-                            {% else %}
-                                <img src="{{ product.image.url }}"
-                                     class="card-img-top" alt="Photo description">
-                                <div class="card-body">
-                            {% endif %}
-                        <p class="card-text">{{ product.name }}</p>
-                        <p class="card-text">{{ product.description }}</p>
-                        <p class="card-text">{{ product.price }}</p>
-                        <a class="nav-link" href="{% url 'product details' product.id %}">Product Details</a>
+    <div class="container mb-5">
+        <div class="row mb-5">
+            {% for product in products %}
+                <div class="card ml-3 mb-3" style="width: 18rem;">
+                    {% if not product.image %}
+                        <p class="card-text">{% static 'images/pumpkin.jpg' %}</p>
+                        <img src="/static/images/pumpkin.jpg" alt="error">
+                    {% else %}
+                        <img src="{{ product.image.url }}"
+                             class="card-img-top" alt="Photo description">
+                        <div class="card-body">
+                    {% endif %}
+                    <p class="card-text">{{ product.name }}</p>
+                    {#                        <p class="card-text">{{ product.description }}</p>#}
+                    <p class="card-text">{{ product.price|floatformat:2 }} lv.</p>
+                    <a class="nav-link" href="{% url 'product details' product.id %}">View product</a>
 
-                        </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
+    </div>
 
-<hr>
+    <hr>
 
-{% if request.last_viewed_products_ids %}
-<h2>Last viewed products :</h2>
+    {% if request.last_viewed_products_ids %}
+        <h2>Last viewed products :</h2>
 
         <div class="container mb-5">
             <div class="row mb-5">
 
                 {% for product in request.last_viewed_products_ids %}
                     <div class="card ml-3 mb-3" style="width: 18rem;">
-                            {% if not product.image %}
-                                <p class="card-text">{% static 'images/pumpkin.jpg' %}</p>
-                            {% else %}
-                                <img src="{{ product.image.url }}"
-                                     class="card-img-top" alt="Photo description">
-                                <div class="card-body">
-                            {% endif %}
+                        {% if not product.image %}
+                            <p class="card-text">{% static 'images/pumpkin.jpg' %}</p>
+                        {% else %}
+                            <img src="{{ product.image.url }}"
+                                 class="card-img-top" alt="Photo description">
+                            <div class="card-body">
+                        {% endif %}
                         <p class="card-text">{{ product.name }}</p>
                         <p class="card-text">{{ product.description }}</p>
                         <p class="card-text">{{ product.price }}</p>
@@ -59,7 +60,7 @@
                 {% endfor %}
             </div>
         </div>
-<hr>
-{% endif %}
+        <hr>
+    {% endif %}
 {% endblock %}
 

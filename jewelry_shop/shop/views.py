@@ -1,12 +1,13 @@
 from django.contrib.auth import mixins as auth_mixin
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
-
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from jewelry_shop.accounts.models import Profile
-from jewelry_shop.common.views_mixins import RedirectToDashboard
-from jewelry_shop.shop.forms import DeleteProductForm
+from jewelry_shop.common.views_mixins import RedirectToDashboard, UserAccessMixin
+from jewelry_shop.shop.forms import DeleteProductForm  # , CreateProductForm
 from jewelry_shop.shop.models import Product
 from jewelry_shop.shopping_cart.models import Order
 
@@ -32,35 +33,29 @@ class DashboardNoProfileView(views.ListView):
     context_object_name = 'products'
 
 
-class CreateProductView(auth_mixin.LoginRequiredMixin, views.CreateView):
+# class CreateProductView(auth_mixin.LoginRequiredMixin, views.CreateView):
+#     model = Product
+#     template_name = 'shop/product_create.html'
+#     form_class = CreateProductForm
+#     success_url = reverse_lazy('dashboard')
+
+class CreateProductView(auth_mixin.LoginRequiredMixin, UserAccessMixin, views.CreateView):
+    permission_required = 'product.add_product'
+
     model = Product
     template_name = 'shop/product_create.html'
     fields = ('image', 'description', 'type', 'price', 'name')
 
     success_url = reverse_lazy('dashboard')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super().form_valid(form)
 
 
-class ProductDetailsView(views.DetailView):  # auth_mixin.LoginRequiredMixin
-    model = Product
-    template_name = 'shop/product_details.html'
-    context_object_name = 'product'
+class EditProductView(UserAccessMixin, views.UpdateView):
+    permission_required = 'product.change_product'
 
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-
-        last_viewed_products = request.session.get('last_viewed_products_ids', [])
-
-        last_viewed_products.insert(0, self.kwargs['pk'])
-        request.session['last_viewed_products_ids'] = last_viewed_products[:3]
-
-        return response
-
-
-class EditProductView(views.UpdateView):
     model = Product
     template_name = 'shop/photo_edit.html'
     fields = ('description', 'image', 'name', 'type', 'price')
@@ -87,6 +82,22 @@ def delete_product(request, pk):
     return render(request, 'shop/product_delete.html', context)
 
 
+class ProductDetailsView(views.DetailView):  # auth_mixin.LoginRequiredMixin
+    model = Product
+    template_name = 'shop/product_details.html'
+    context_object_name = 'product'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+
+        last_viewed_products = request.session.get('last_viewed_products_ids', [])
+
+        last_viewed_products.insert(0, self.kwargs['pk'])
+        request.session['last_viewed_products_ids'] = last_viewed_products[:3]
+
+        return response
+
+
 @login_required
 def product_list(request):
     object_list = Product.objects.all()
@@ -105,7 +116,19 @@ def product_list(request):
     return render(request, 'accounts/products_list.html', context)
 
 
-class ShowAllProfiles(views.ListView):
+class ShowAllProfiles(UserAccessMixin, auth_mixin.LoginRequiredMixin, views.ListView):
+    permission_required = 'product.view_product'
+
     model = Profile
     template_name = 'shop/profiles.html'
     object = 'profile'
+
+
+class NotFoundView(views.TemplateView):
+    template_name = 'shop/404.html'
+
+#
+# class InternalErrorView(views.View):
+#     def get(self, request):
+#         # return HttpResponse('An error occurred, please try again. (CBV)')
+#         return redirect('shop/404.html')

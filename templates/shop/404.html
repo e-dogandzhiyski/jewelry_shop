@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h8>This page does not exist </h8>
+        <img style="width: 98%" src="{% static 'images/panda_404.png'  %}" alt="">
+        <h8><a class="nav-link" href="{% url 'dashboard'  %}">Go back to the products page</a></h8>
+        </div>
+</body>
+</html>
+
+{% endblock %}

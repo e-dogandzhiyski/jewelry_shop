@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_one.css' %}">
     <title>Home</title>
 </head>
 
@@ -51,12 +51,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout user' %}">Logout</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'shipping address' %}">Address</a>
-                </li>
-                {#                    <li class="nav-item">#}
-                {#                        <a class="nav-link" href="{% url 'profile previous orders' profile.id %}">Profile Previous orders</a>#}
-                {#                    </li>#}
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'dashboard with-out profile' %}">Products</a>
@@ -85,6 +79,4 @@
     {% block page_content %}
     {% endblock %}
 </div>
-
-
 

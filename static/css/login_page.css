@@ -3,11 +3,11 @@
 }
 
 body {
-    background-color: mediumpurple;
+    background-color: lightgoldenrodyellow;
 }
 
 fieldset {
-    background-color: gold;
+    background-color: mediumpurple;
     width: 500px;
     margin-left: 680px;
     /*margin-right: 700px;*/
@@ -45,9 +45,9 @@ h1 {
 }
 
 button {
-    background-color: #008CBA; /* Green */
+    background-color: mediumpurple; /* Green */
     border: none;
-    color: white;
+    color: black;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;

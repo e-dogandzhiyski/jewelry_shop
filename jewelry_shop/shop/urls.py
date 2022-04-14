@@ -1,7 +1,7 @@
 from django.urls import path
 
 from jewelry_shop.shop.views import HomeView, DashboardView, DashboardNoProfileView, \
-    ProductDetailsView, EditProductView, product_list, delete_product, CreateProductView, ShowAllProfiles
+    ProductDetailsView, EditProductView, delete_product, CreateProductView, ShowAllProfiles, NotFoundView, product_list
 
 urlpatterns = (
     path('', HomeView.as_view(), name='index'),
@@ -17,4 +17,5 @@ urlpatterns = (
     path('product/details/<int:pk>/', ProductDetailsView.as_view(), name='product details'),
 
     path('product-list', product_list, name='product list'),
+    path('not-found/', NotFoundView.as_view(), name='page not found')
 )

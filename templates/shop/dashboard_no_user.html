@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_one.css' %}">
+    <title>Home</title>
+</head>
+
 {% block page_content %}
-    <h1 class='text-center'>
-        {% if product_photos %}
-            All Products
-        {% else %}
+    <h2 class='text-center'>
+        {% if not products %}
             No products yet
         {% endif %}
-    </h1>
+    </h2>
 
         <div class="container mb-5">
             <div class="row mb-5">
@@ -23,7 +28,7 @@
                             {% endif %}
                             <a class="nav-link" href="{% url 'product details' product.id %}">Product Details</a>
                         <p class="card-text">{{ product.description }}</p>
-                        <p class="card-text">{{ product.price }}</p>
+                        <p class="card-text">{{ product.price|floatformat:2 }}</p>
                         <p class="card-text">{{ product.name }}</p>
 
                         </div>

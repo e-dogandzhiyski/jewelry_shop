@@ -11,12 +11,14 @@
         <hr>
 
     {% for profile in profile_list %}
-      <h2>{{ profile.email }}({{ profile.first_name }} {{ profile.last_name }}) Has the folowing oreder: {{ profile.order_set }} With the given address: {{ profile.address }} {# </h2>#}
+      <h2> {{ profile.first_name }} {{ profile.last_name }} ({{ profile.email }}),
+        Has the following order: {{ profile.order_set }}
+        With the given address: {{ profile.user.shippingaddress }} {# </h2> #}
         <hr>
 
-{#             {% for order in ord %}#}
-{#                {{ order }}#}
-{#             {% endfor %}</h2>#}
+             {% for order in orders %}
+                {{ order }}
+             {% endfor %}</h2>
 
     {% endfor %}
 </body>
