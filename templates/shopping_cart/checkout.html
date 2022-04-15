@@ -35,10 +35,12 @@
                 <td><strong>{{ order.get_cart_total|floatformat:2 }} lv.</strong></td>
             </tr>
         </table>
+        {% if request.user.card_info %}
         <form method="POST" action="{% url 'process payment' order.id %}">
             {% csrf_token %}
             <button style="width: 50%; float: right;" class="btn btn-primary">Pay</button>
         </form>
+        {% endif %}
         <form method="POST" action="{% url 'card info' %}">
             {% csrf_token %}
             <button style="width: 50%; float: right;" class="btn btn-primary">Add card info</button>

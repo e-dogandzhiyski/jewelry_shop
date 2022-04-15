@@ -33,12 +33,6 @@ class DashboardNoProfileView(views.ListView):
     context_object_name = 'products'
 
 
-# class CreateProductView(auth_mixin.LoginRequiredMixin, views.CreateView):
-#     model = Product
-#     template_name = 'shop/product_create.html'
-#     form_class = CreateProductForm
-#     success_url = reverse_lazy('dashboard')
-
 class CreateProductView(auth_mixin.LoginRequiredMixin, UserAccessMixin, views.CreateView):
     permission_required = 'product.add_product'
 
@@ -58,7 +52,7 @@ class EditProductView(UserAccessMixin, views.UpdateView):
 
     model = Product
     template_name = 'shop/photo_edit.html'
-    fields = ('description', 'image', 'name', 'type', 'price')
+    fields = ('description', 'name', 'type', 'price')
 
     def get_success_url(self):
         return reverse_lazy('product details', kwargs={'pk': self.object.id})
@@ -126,9 +120,3 @@ class ShowAllProfiles(UserAccessMixin, auth_mixin.LoginRequiredMixin, views.List
 
 class NotFoundView(views.TemplateView):
     template_name = 'shop/404.html'
-
-#
-# class InternalErrorView(views.View):
-#     def get(self, request):
-#         # return HttpResponse('An error occurred, please try again. (CBV)')
-#         return redirect('shop/404.html')

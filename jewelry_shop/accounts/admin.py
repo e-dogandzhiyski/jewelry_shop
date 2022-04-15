@@ -9,7 +9,7 @@ from jewelry_shop.accounts.models import Profile, AppUser
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     # inlines = (ProductInlineAdmin,)
-    list_display = ('first_name', 'last_name')
+    list_display = ('first_name', 'last_name', 'email')
 
 
 @admin.register(AppUser)

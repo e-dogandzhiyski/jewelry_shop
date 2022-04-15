@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+    <style>
+        table.borderless td, table.borderless th {
+            border: none !important;
+        }
+    </style>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/checkoutt.css' %}">
+        <title>Home</title>
+    </head>
+
+    <section>
+
+        <table class="table">
+            <tr>
+                <td><h4>Order Summary</h4></td>
+            </tr>
+            <tr>
+                <td>
+                    {% for item in order.get_cart_items %}
+                        <tr>
+                            <td>{{ item }}</td>
+                            <td>{{ item.product.price|floatformat:2 }} lv.</td>
+                        </tr>
+                    {% endfor %}
+            <tr>
+                <td><strong>Order Total</strong></td>
+                <td><strong>{{ order.get_cart_total|floatformat:2 }} lv.</strong></td>
+            </tr>
+        </table>
+        <form method="POST" action="{% url 'process payment' order.id %}">
+            {% csrf_token %}
+            <button style="width: 50%; float: right;" class="btn btn-primary">Pay</button>
+        </form>
+        <form method="POST" action="{% url 'card info' %}">
+            {% csrf_token %}
+            <button style="width: 50%; float: right;" class="btn btn-primary">Change card info</button>
+        </form>
+        </div>
+        </div>
+    </section>
+{% endblock page_content %}

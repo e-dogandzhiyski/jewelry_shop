@@ -3,7 +3,7 @@ from django.views.generic import RedirectView
 
 from jewelry_shop.accounts.views import UserRegisterView, UserLoginView, UserLogoutView, ProfileDetailsView, \
     ChangeUserPasswordView, AddShippingAddressView, \
-    AddCardView  # , ProfileOrdersView, ProfileShippingAddressView
+    AddCardView, my_profile
 from jewelry_shop.shopping_cart.views import process_payment
 
 urlpatterns = [
@@ -20,6 +20,5 @@ urlpatterns = [
     path('password_change_done/', RedirectView.as_view(url=reverse_lazy('dashboard')), name='password change done'),
 
     path('payment/<order_id>', process_payment, name='process payment'),
-
-    # path('my-previous-orders/<int:id>/', ProfileOrdersView.as_view(), name='profile previous orders'),
+    path('profile/', my_profile, name='my_profile'),
 ]

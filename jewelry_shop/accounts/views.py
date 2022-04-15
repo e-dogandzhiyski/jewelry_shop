@@ -5,18 +5,8 @@ from django.views import generic as views
 from django.contrib.auth import views as auth_views
 
 from jewelry_shop.accounts.forms import CreateProfileForm, ShippingAddressForm, CardInfoForm
-from jewelry_shop.accounts.models import Profile, ShippingAddress
+from jewelry_shop.accounts.models import Profile
 from jewelry_shop.shopping_cart.models import Order
-
-
-def my_profile(request):
-    my_user_profile = Profile.objects.filter(user=request.user).first()
-    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
-    context = {
-        'my_orders': my_orders
-    }
-
-    return render(request, 'accounts/profile.html', context)
 
 
 class UserRegisterView(views.CreateView):
@@ -54,25 +44,15 @@ class ChangeUserPasswordView(auth_views.PasswordChangeView):
     template_name = 'accounts/change_password.html'
 
 
-class ProfileOrdersView(views.DetailView):
-    model = Profile
-    template_name = 'accounts/my_orders.html'
-    context = 'products'
-    # context = 'orders'
-
-
 class AddShippingAddressView(views.CreateView):
     template_name = 'accounts/shipping_address.html'
     form_class = ShippingAddressForm
-    success_url = reverse_lazy('checkout')
+    success_url = reverse_lazy('checkout two')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
-    #
-    # def get_success_url(self):
-    #     return reverse_lazy('process payment', kwargs={'pk': self.object.id})
 
 
 class AddCardView(views.CreateView):
@@ -84,3 +64,31 @@ class AddCardView(views.CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+
+
+def my_profile(request):
+    my_user_profile = Profile.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_user_profile)
+    context = {
+        'my_orders': my_orders
+    }
+
+    return render(request, 'accounts/my_orders.html', context)
+
+
+# def all_orders(request):
+#     for profile in Profile.objects.all():
+#         user_profile = profile
+#         # if user_profile._order:
+#         user_order = Order.objects.filter(is_ordered=True, owner=user_profile)
+#         all_profiles = []
+#         all_users_orders = []
+#         all_profiles.append(user_profile)
+#         all_users_orders.append(user_order)
+#
+#         context = {
+#             'all_users_orders': all_users_orders,
+#             'user': all_profiles
+#         }
+#
+#         return render(request, 'accounts/all_orders.html', context)

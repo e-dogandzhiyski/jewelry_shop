@@ -1,6 +1,21 @@
-from jewelry_shop.common.helpers import BootstrapFormMixin
+# from jewelry_shop.common.helpers import BootstrapFormMixin
 from jewelry_shop.shop.models import Product  # Product
 from django import forms
+
+
+class DeleteProductForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for _, field in self.fields.items():
+            field.widget.attrs['readonly'] = 'readonly'
+
+    def save(self, commit=True):
+        self.instance.delete()
+        return self.instance
+
+    class Meta:
+        model = Product
+        fields = ('name', 'type', 'price', 'image', 'description')
 
 
 # class CreateProductForm(BootstrapFormMixin, forms.ModelForm):
@@ -68,17 +83,3 @@ from django import forms
 #             ),
 #         }
 
-
-class DeleteProductForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for _, field in self.fields.items():
-            field.widget.attrs['readonly'] = 'readonly'
-
-    def save(self, commit=True):
-        self.instance.delete()
-        return self.instance
-
-    class Meta:
-        model = Product
-        fields = ('name', 'type', 'price', 'image', 'description')

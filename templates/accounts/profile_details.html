@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block page_content %}
 
-    <div class="row justify-content-center">
-        <div class="d-flex">
+{#    <div class="row justify-content-center">#}
+{#        <div class="d-flex">#}
             <div>
 
 
@@ -11,10 +11,10 @@
                     <h2><u>Email:</u> {{ profile.email }}</h2>
                 </div>
 
-                <h2><a href="{% url 'dashboard' %}">View Cart</a></h2>
+{#                <h2><a href="{% url 'order_details' %}">View Cart</a></h2>#}
                 <h2><a href="{% url 'change password' %}">Change Password</a></h2>
             </div>
-        </div>
-    </div>
+{#        </div>#}
+{#    </div>#}
 
 {% endblock %}

@@ -75,6 +75,15 @@ def checkout(request):
 
 
 @login_required()
+def checkout_two(request):
+    existing_order = get_user_pending_order(request)
+    context = {
+        'order': existing_order,
+    }
+    return render(request, 'shopping_cart/checkout_two.html', context)
+
+
+@login_required()
 def update_transaction_records(request, order_id):
     # get the order being processed
     order_to_purchase = Order.objects.filter(pk=order_id).first()
@@ -97,11 +106,8 @@ def update_transaction_records(request, order_id):
     user_profile.products.add(*order_products)
     user_profile.save()
 
-    # messages.info(request, "Thank you! Your purchase was successful!")
-    print("Thank you! Your purchase was successful!")                                       # returns message but i don't know how to do messages
     return redirect(reverse('dashboard'))
 
 
 def success(request, **kwargs):
-    # a view signifying the transaction was successful
     return render(request, 'shopping_cart/purchase_success.html', {})

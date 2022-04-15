@@ -8,6 +8,6 @@ class ProductInlineAdmin(admin.StackedInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'type')
+    list_display = ('name', 'type', 'price',)
 
 

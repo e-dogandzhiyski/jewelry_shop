@@ -40,4 +40,4 @@ class Product(models.Model):
     )
 
     def __str__(self):
-        return f'{self.type}'
+        return f'{self.type} {self.price}'

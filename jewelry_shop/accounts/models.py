@@ -67,7 +67,7 @@ class Profile(models.Model):
     products = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.address}'
+        return f'{self.first_name} {self.last_name}'
 
 
 class ShippingAddress(models.Model):
